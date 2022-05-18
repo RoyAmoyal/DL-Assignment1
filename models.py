@@ -27,6 +27,12 @@ class MyNeuralNetwork(Abstract_Model):
                 weights, bias = f.parameters()
                 weights.data = .01 * np.random.random((weights.data.shape[0], weights.data.shape[1]))
                 bias.data = np.zeros((1, weights.data.shape[1]))
+            if f.type == 'resblock':
+                weights1, weights2, bias1, bias2 = f.parameters()
+                weights1.data = .01 * np.random.random((weights1.data.shape[0], weights1.data.shape[1]))
+                weights2.data = .01 * np.random.random((weights2.data.shape[0], weights2.data.shape[1]))
+                bias1.data = np.zeros((1, weights1.data.shape[1]))
+                bias2.data = np.zeros((1, weights2.data.shape[1]))
 
     def fit(self, X_train, y_train, X_test, y_test, batch_size, num_epochs, optimizer):
         loss_history = []

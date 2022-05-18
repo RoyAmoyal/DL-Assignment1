@@ -4,8 +4,8 @@ from activations import ReLU
 
 class Tensor:
     def __init__(self, shape):
-        self.data = np.ndarray(shape, np.float32)
-        self.grad = np.ndarray(shape, np.float32)
+        self.data = np.ndarray(shape, np.float32)  # here keep the weights
+        self.grad = np.ndarray(shape, np.float32)  # here keep the grads of the weights
 
 
 class Abstract_Layer(object):
@@ -72,21 +72,27 @@ class Softmax(Abstract_Layer):
         return [self.weights, self.bias]
 
 
-class ResNet(Abstract_Layer):
+class ResBlock(Abstract_Layer):  # with only 1 relu
 
-    def __init__(self, in_nodes1, out_nodes1, in_nodes2, out_nodes2):
-        self.type = 'linear'
-        self.weights1 = Tensor((in_nodes1, out_nodes1))
-        self.weights2 = Tensor((in_nodes2, out_nodes2))
-        self.bias1 = Tensor((1, out_nodes1))
-        self.bias2 = Tensor((1, out_nodes2))
-        self.relu1 = ReLU()
-        self.relu2 = ReLU()
+    def __init__(self, in_nodes, out_nodes):
+        self.type = 'resblock'
+        self.weights1 = Tensor((in_nodes, out_nodes))
+        self.weights2 = Tensor((in_nodes, out_nodes))
+        self.bias1 = Tensor((1, out_nodes))
+        self.bias2 = Tensor((1, out_nodes))
+        self.relu = ReLU()
 
     def forward(self, x: np.ndarray) -> np.ndarray:
         self.input = x
-        return self.relu2.forward(
-            x @ self.weights2 + self.relu1.forward(np.dot(x, self.weights1.data) + self.bias1.data) + self.bias2)
+        return np.dot(x, self.weights2.data) + self.relu.forward(np.dot(x, self.weights1.data) + self.bias1.data) + self.bias2.data
+
+    def backward(self, d_y: np.ndarray) -> np.ndarray:
+        temp_x = self.input
+        self.weights1.grad += np.dot((self.input * np.where(temp_x > 0, temp_x, 0)).T, d_y)
+        self.weights2.grad += np.dot(self.input.T, d_y)
+        self.bias1.grad += np.sum(np.dot((np.where(temp_x > 0, temp_x, 0)).T, d_y), axis=0, keepdims=True)
+        self.bias2.grad += np.sum(d_y, axis=0, keepdims=True)
+        return np.dot(d_y, self.weights1.data.T) * np.where(temp_x > 0, temp_x, 0) + np.dot(d_y, self.weights2.data.T)
 
     def parameters(self):
         return [self.weights1, self.weights2, self.bias1, self.bias2]
