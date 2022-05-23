@@ -41,6 +41,7 @@ class MyNeuralNetwork(Abstract_Model):
         self.init()
         data_gen = utils.DataGenerator(X_train, y_train, batch_size)
         itr = 0
+        epochs_counter = 0
         for epoch in range(num_epochs):
             epoch_iter = 0
             epoch_accuracy = []
@@ -60,6 +61,10 @@ class MyNeuralNetwork(Abstract_Model):
             test_acc = self.evaluate(X_test, y_test)
             test_accuracy.append(test_acc)
             print("epoch = {}, train accuracy = {} test accuracy = {}".format(epoch, train_acc, test_acc))
+            epochs_counter += 1
+            if epochs_counter == 80:
+                optimizer.update_lr()
+                epochs_counter = 0
         return loss_history, train_accuracy, test_accuracy
 
     def forward(self, X):
