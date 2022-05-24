@@ -1,6 +1,6 @@
 import numpy as np
 from activations import ReLU
-
+from optimizers import SGD
 
 class Tensor:
     def __init__(self, shape):
@@ -96,3 +96,4 @@ class ResBlock(Abstract_Layer):  # with only 1 relu
 
     def parameters(self):
         return [self.weights1, self.weights2, self.bias1, self.bias2]
+
