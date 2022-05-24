@@ -6,15 +6,13 @@ import layers
 import optimizers
 import models
 import pandas as pd
-from network_tests import grad_test_W, grad_test_b, jacobian_test_W, jacobian_test_b, grad_test_W_whole_network, grad_test_b_whole_network
+from network_tests import grad_test, jacobian_test, grad_test_whole_network
 
 def read_mat(name):
     from scipy.io import loadmat
     return loadmat(name)
 
 if __name__=="__main__":
-
-
     # HyperParams
     batch_size = 50
     num_epochs = 100
@@ -28,24 +26,30 @@ if __name__=="__main__":
     X_train, y_train, X_test, y_test = utils.get_data('SwissRollData')
     X_train, y_train = shuffle(X_train, y_train)
 
+    # test of softmax (2.1.3))
+    # softmax_model = models.MyNeuralNetwork()
+    # softmax_model.add(layers.Softmax(dimensions, 2))
+    # optimizer = optimizers.SGD(softmax_model.parameters, lr=1)
+    # losses, train_accuracy, test_accuracy = softmax_model.fit(X_train, y_train, X_test, y_test, batch_size, num_epochs,
+    #                                                   optimizer)
+    # utils.plot_scores(train_accuracy, test_accuracy)
+
     # gradient and jacobian tests
-    grad_test_W(X_train, y_train)
-    grad_test_b(X_train, y_train)
-    jacobian_test_W(X_train, y_train)
-    jacobian_test_b(X_train, y_train)
-    grad_test_W_whole_network(X_train, y_train)
-    grad_test_b_whole_network(X_train, y_train)
+    grad_test(X_train, y_train)
+    jacobian_test(X_train, y_train)
+    grad_test_whole_network(X_train, y_train, network='Linear')
 
     model = models.MyNeuralNetwork()
     if network == 'ResNet':
         model.add(layers.ResBlock(dimensions, hidden_units))
+        model.add(layers.ReLU())
+        model.add(layers.Linear(hidden_units, hidden_units2))
     else:
-        model.add(layers.Linear(dimensions, hidden_units))
+        model.add(layers.Linear(dimensions, hidden_units2))
     model.add(activations.ReLU())
-    model.add(layers.Softmax(hidden_units, 5))
-    optimizer = optimizers.SGD(model.parameters, lr=0.1)
+    model.add(layers.Softmax(hidden_units2, 2))
+    optimizer = optimizers.SGD(model.parameters, lr=1)
     losses, train_accuracy, test_accuracy = model.fit(X_train, y_train, X_test, y_test, batch_size, num_epochs, optimizer)
-
     # plotting
     utils.plot_scores(train_accuracy, test_accuracy)
 
