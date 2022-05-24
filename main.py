@@ -21,7 +21,7 @@ if __name__=="__main__":
     data = np.random.rand(2, 10)
     x = data[0, :]
     y = data[1,:]
-    for i in range(10000):
+    for i in range(1000):
         theta = loss_func_SGD(data,theta,learning_rate=0.1)
     m,b = theta
 
