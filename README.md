@@ -1,7 +1,7 @@
 
 # Neural Network From Scartch 
 
-This project is an assignment from the course "Deep Learning".
+This project is an assignment from the course "Deep Learning" at BGU.
 The main purpose of this assignment is to implement a Neural Network from scratch, without any libraries 
 like Tensorflow or PyTorch. 
 
