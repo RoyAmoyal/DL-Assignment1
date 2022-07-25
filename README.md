@@ -19,4 +19,4 @@ standard neural network.
 
 The project was written in Python language. the loops in Python
 are not efficient in terms of run-time, so i tried to avoid the usage of the
-loops and do a lot of stuff with a matrix
+loops and do a lot of stuff with a matrix notations
