@@ -11,4 +11,4 @@ The first part was to implement a standard neural network, that should make a cl
 
 The second part was to do the same, but with Residual NN instead of a standard neural network.
 
-The project was written in Python language. the loops in Python are not efficient in terms of run-time, so I tried to avoid the usage of the loops and do a lot of stuff with matrix notations
+The project was written in Python language. the loops in Python are not efficient in terms of run-time, so we tried to avoid the usage of the loops and do a lot of stuff with matrix notations
