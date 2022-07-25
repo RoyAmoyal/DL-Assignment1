@@ -24,4 +24,5 @@ We were used three datasets:
  |  Picks | 
  
 the SwissRoll data set is a 2-dimentional data looks like:
+
 ![SwissRollData](SwissRollData.jpg)
