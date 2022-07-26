@@ -23,7 +23,9 @@ We were used three datasets:
  |  GMM | 
  |  Picks | 
  
-the SwissRoll data set is a 2-dimentional data looks like:
+## Example of one of the datasets
+
+The SwissRoll data set is a 2-dimentional data looks like:
 
 ![SwissRollData](SwissRollData.jpg)
 
