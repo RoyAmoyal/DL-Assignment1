@@ -26,3 +26,7 @@ We were used three datasets:
 the SwissRoll data set is a 2-dimentional data looks like:
 
 ![SwissRollData](SwissRollData.jpg)
+
+The accuracy graph of our model (the Residual nn version):
+
+![accuracy](accuracy.jpg)
