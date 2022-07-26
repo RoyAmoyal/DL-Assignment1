@@ -4,7 +4,7 @@
 This project is an assignment from the course "Deep Learning" at BGU. The main purpose of this assignment is to implement a Neural Network from scratch, without any libraries like Tensorflow or PyTorch.
 
 ## The Goal Of This Project
-The goal of this project is to gain an idea of how deep learning frameworks work behind the scenes. stuff like backward propagation, optimization, the influence of hyperparameters, and more.
+The goal of this project is to gain an idea of how deep learning frameworks work behind the scenes. stuff like **backward propagation, optimization, the influence of hyperparameters**, and more.
 
 ## Details About The Project
 The first part was to implement a standard neural network, that should make a classification of three different data sets.
