@@ -29,6 +29,6 @@ The SwissRoll data set is a 2-dimentional data looks like:
 
 ![SwissRollData](SwissRollData.jpg)
 
-The accuracy graph of our model (the Residual nn version):
+The accuracy graph of our model (the Residual nn version) for classification:
 
 ![accuracy](accuracy.jpg)
